@@ -1,0 +1,41 @@
+How to build a root file of trigger data
+
+1. ssh into daq17 so run the command, 
+	ssh dldaq@daq17.triumf.ca
+
+2. Navigate into your folder and into it's dlana folder (NOTE: IF YOU ARE NOT DOING CODE DEVELOPMENT AND WANT TO JUST USE THE CODE THEN GO TO THE FOLDER online/dlana AND DO ALL OF THIS FROM THERE. This example was written for Sidney).
+
+3. First, we need to run the data to get it into a root file. Run the following command, making sure all of the -- stay as double dashes and not one really long dash and replacing the ##### with the run number you want to analyze.
+	./dlana.exe /daq/daqstore/dldaq/data/run#####sub000.mid.lz4 -- --dltdc --dltdc16
+
+4. That will print a whole bunch of stuff to the screen and take a few minutes. Once that's done, we need to set up the first calibration: calibrating the fine times. Run the following.
+	./dlana.exe /daq/daqstore/dldaq/data/run#####sub000.mid.lz4 -- --dltdc --dltdc16 --dltdc-finetime
+
+5. Now we need to have the computer recognize that calibration file when applying calibrations. Go to the subfolder of your folder called dlcfmdb and enter
+	vim dltdc_finetime.txt
+
+6. In this file, add a line (in the appropriate spot so all of the first entries of a line are ordered numerically) of
+	### 0 ###
+	where ### is the run number you are working with without the leading zeroes. Press "i" to enter editing mode and "esc" to exit editting mode. Save the changes by entering
+	:wq
+	when outside of editing mode.
+
+7. Now we need to apply the calibration you just did. Navigate outside of dlcfmdb and make to your dlana folder and re-run the first command you entered.
+	./dlana.exe /daq/daqstore/dldaq/data/run#####sub000.mid.lz4 -- --dltdc --dltdc16
+
+8. Next we are going to do the second calibration: calibrating the offsets to bring the time difference plots centred around zero (well, it will do that for cosmic runs). Run the following command.
+	./dlana.exe /daq/daqstore/dldaq/data/run#####sub000.mid.lz4 -- --dltdc --dltdc16 --dltdc-offsets
+
+9.	Just like with the fine times, navigate to dlcfmdb and enter,
+	vim dltdc_finetime.txt
+
+10. Again like the fine times, add a line for your run number in the spot where it fits numerically of
+	### 0 ###
+	where ### is the run number you are working with without the leading zeroes.
+
+11. Finally, go back to your dlana folder and build the root file again.
+	./dlana.exe /daq/daqstore/dldaq/data/run#####sub000.mid.lz4 -- --dltdc --dltdc16
+
+12. Done! Now on your computer open a terminal that is not ssh-d into daq17 and run 
+	scp dldaq@daq17.triumf.ca:/home/dldaq/sidney/dlana/root_output_files/output#####.root /path/on/your/computer/where/you/want/the/file/to/go
+	so you can get it onto your computer and open it root or with uproot. Again, ##### is your run number of interest, and of course you fill in a real path. This is how you do it on mac/linux, I don't know what windows does.
