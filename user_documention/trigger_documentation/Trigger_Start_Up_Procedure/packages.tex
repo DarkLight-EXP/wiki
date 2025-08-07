@@ -1,0 +1,33 @@
+%Math Stuff
+\usepackage{amsmath} % many display options for math modes and such (VERY IMPORTANT)
+%\usepackage{physics} % useful math symbols and macros (VERY IMPORTANT)
+\usepackage{amssymb} % heck ton of math symbols and fonts (VERY IMPORTANT)
+\usepackage{amsfonts} % Additional fonts, math symbols, and options for existing fonts (IMPORTANT)
+\usepackage{mathtools} % lots of cool mathtools oh wait that is the name (IMPORTANT)
+\usepackage{siunitx} % allows you to quickly define units within math mode (IMPORTANT)
+\usepackage{array} % allows you to write piece-wise functions, matrices, and other cool things (IMPORTANT)
+\usepackage{txfonts} % defines times new roman as default text font and provides supporting math symbols
+\usepackage{braket} % allows the use of detailed Dirac braket notation
+\usepackage{cancel} % used to cancel terms (with X or diagonal line) while writing math (useful for assignments)
+\usepackage{ulem} % underlines, typewriter font (for comp sci somewhat), and striking out (required for cancel package)
+\usepackage{empheq} %Extension of amsmath for boxing equations or answers
+
+
+%Formatting Stuff
+\usepackage[utf8]{inputenc} % the typesetting rules
+\usepackage[left = 22mm, right = 22mm]{geometry} % flexible and easy interface to change page dimensions
+\usepackage{graphicx} % provides additional options for figures
+\usepackage{float} % allows you to tell latex no really I want the figure HERE (with H)
+\usepackage{color} % provides coloring capabilities to everything
+\usepackage{fancyhdr} % making fancy headers (obviously)
+\usepackage{changepage} % allows to change page formatting in the middle of a document (rather than the same throughout) 
+\usepackage{enumitem} % better control over enumerate and itemize
+\usepackage[labelfont=bf]{caption} % altering options for captions
+\usepackage{sidecap} % allows sideways captions for figures and tables
+\usepackage{soul,xcolor} % can enhance striking, underlining, and highlighting (in non-math mode)
+
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \newpage}
